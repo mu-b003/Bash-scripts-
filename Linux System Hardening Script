@@ -1,0 +1,30 @@
+#!/bin/bash
+
+echo "====== Linux Hardening ======"
+
+# تحديث النظام
+echo "[+] Updating system..."
+sudo apt update && sudo apt upgrade -y
+
+# إغلاق تسجيل الدخول كـ root عبر SSH
+echo "[+] Disabling root SSH login..."
+sudo sed -i 's/PermitRootLogin yes/PermitRootLogin no/' /etc/ssh/sshd_config
+
+# تعطيل تسجيل الدخول بكلمة المرور (اختياري)
+echo "[+] Disabling password authentication..."
+sudo sed -i 's/PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
+
+# إعادة تشغيل SSH
+sudo systemctl restart ssh
+
+# تفعيل الجدار الناري
+echo "[+] Enabling firewall..."
+sudo ufw enable
+
+# السماح بـ SSH فقط
+sudo ufw allow ssh
+
+# عرض الحالة
+sudo ufw status
+
+echo "Hardening complete!"
