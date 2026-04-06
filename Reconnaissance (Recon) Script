@@ -1,0 +1,23 @@
+#!/bin/bash
+
+TARGET=$1
+
+echo "====== Recon for $TARGET ======"
+
+# جلب IP
+echo "[+] IP Address:"
+ping -c 1 $TARGET | grep "PING" | awk '{print $3}'
+
+# DNS Information
+echo "[+] DNS Info:"
+nslookup $TARGET
+
+# Ports Scan
+echo "[+] Open Ports:"
+nmap -F $TARGET
+
+# HTTP Headers
+echo "[+] HTTP Headers:"
+curl -I http://$TARGET
+
+echo "================================"
