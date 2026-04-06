@@ -1,0 +1,15 @@
+#!/bin/bash
+
+echo "Enter IP:"
+read ip
+
+echo "Enter Port:"
+read port
+
+timeout 1 bash -c "echo > /dev/tcp/$ip/$port" 2>/dev/null
+
+if [ $? -eq 0 ]; then
+  echo "Port is OPEN"
+else
+  echo "Port is CLOSED"
+fi
