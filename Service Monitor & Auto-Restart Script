@@ -1,0 +1,16 @@
+#!/bin/bash
+
+SERVICE="ssh"
+
+echo "Checking $SERVICE service..."
+
+# التحقق من حالة الخدمة
+systemctl is-active --quiet $SERVICE
+
+if [ $? -ne 0 ]; then
+  echo "[!] $SERVICE is DOWN! Restarting..."
+  sudo systemctl restart $SERVICE
+  echo "[+] $SERVICE restarted."
+else
+  echo "[+] $SERVICE is running."
+fi
