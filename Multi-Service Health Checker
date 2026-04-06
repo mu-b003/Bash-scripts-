@@ -1,0 +1,15 @@
+#!/bin/bash
+
+services=("ssh" "apache2" "mysql")
+
+for service in "${services[@]}"
+do
+  systemctl is-active --quiet $service
+
+  if [ $? -ne 0 ]; then
+    echo "[!] $service DOWN -> restarting"
+    sudo systemctl restart $service
+  else
+    echo "[+ ] $service OK"
+  fi
+done
