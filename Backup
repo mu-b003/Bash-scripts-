@@ -1,0 +1,7 @@
+#!/bin/bash
+
+src="file.txt"
+backup="backup_$(date +%Y%m%d).txt"
+
+cp $src $backup
+echo "Backup created: $backup"
