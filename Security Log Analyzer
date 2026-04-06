@@ -1,0 +1,18 @@
+#!/bin/bash
+
+LOG_FILE="/var/log/auth.log"
+
+echo "====== Failed Login Attempts ======"
+
+# استخراج المحاولات الفاشلة
+grep "Failed password" $LOG_FILE > failed.txt
+
+# عدد المحاولات
+echo "[+] Total Failed Attempts:"
+wc -l failed.txt
+
+# استخراج IPs
+echo "[+] Attacker IPs:"
+awk '{print $(NF-3)}' failed.txt | sort | uniq -c | sort -nr
+
+echo "================================"
