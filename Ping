@@ -1,0 +1,12 @@
+#!/bin/bash
+
+echo "Enter IP:"
+read ip
+
+ping -c 4 $ip
+
+if [ $? -eq 0 ]; then
+  echo "Host is UP"
+else
+  echo "Host is DOWN"
+fi
