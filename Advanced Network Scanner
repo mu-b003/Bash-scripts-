@@ -1,0 +1,23 @@
+#!/bin/bash
+
+TARGET=$1
+
+echo "====== Nmap Scan for $TARGET ======"
+
+# فحص سريع للمنافذ
+echo "[+] Fast Scan..."
+nmap -F $TARGET
+
+# فحص الخدمات
+echo "[+] Service Version Detection..."
+nmap -sV $TARGET
+
+# فحص النظام
+echo "[+] OS Detection..."
+nmap -O $TARGET
+
+# فحص شامل + حفظ النتائج
+echo "[+] Full Scan + Save Results..."
+nmap -A $TARGET -oN scan_result.txt
+
+echo "Scan complete! Results saved in scan_result.txt"
